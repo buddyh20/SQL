@@ -1,0 +1,26 @@
+--Create a store database
+
+
+CREATE TABLE electronics (id integer primary key, name TEXT, quanity INTEGER, price INTEGER, aisle INTEGER);
+INSERT INTO electronics VALUES (1, "iPhone 14 Pro MAX", 25, 1099, 15);
+INSERT INTO electronics VALUES (2, "iPhone 14 Plus", 15, 899, 15);
+INSERT INTO electronics VALUES (3, "MacBook Pro", 10, 2499, 14);
+INSERT INTO electronics VALUES (4, "MacBook Air", 5, 999, 14);
+INSERT INTO electronics VALUES (5, "Quest 2", 16, 499, 13);
+INSERT INTO electronics VALUES (6, "Quest Pro", 31, 1499, 13);
+INSERT INTO electronics VALUES (7, "Galaxy S23 Ultra", 11, 1199, 12);
+INSERT INTO electronics VALUES (8, "Galaxy S22 Ultra", 6, 1099, 12);
+INSERT INTO electronics VALUES (9, "iPad Pro 6th Gen", 24, 1499, 11);
+INSERT INTO electronics VALUES (10, "iPhone Accessories", 400, 24.99, 10);
+INSERT INTO electronics VALUES (11, "Galaxy Accessories", 350, 23.99, 9);
+INSERT INTO electronics VALUES (12, "PS5", 47, 499, 8);
+INSERT INTO electronics VALUES (13, "XBOX X", 51, 499, 7);
+INSERT INTO electronics VALUES (14, "PS5 Games", 350, 69.99, 8);
+INSERT INTO electronics VALUES (15, "XBOX X Games", 350, 69.99, 7);
+
+
+--display the database in order by price
+SELECT * FROM electronics ORDER BY price;
+
+--display the quanity of each product by aisle
+SELECT aisle, SUM(quanity) FROM electronics GROUP BY aisle;
