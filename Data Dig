@@ -71,7 +71,7 @@ SELECT Winner, Round(AVG(Winner_Pts)) AS avg_pts FROM superbowls
 GROUP BY Winner
 HAVING avg_pts > 30;
 
-/* Group the winning team thats has 4 or more wins */
+/* Group the winning teams thats has 4 or more wins */
 SELECT COUNT(*) AS total,
 Winner FROM superbowls GROUP BY Winner HAVING COUNT(*) >= 4;
 
@@ -88,16 +88,16 @@ HAVING min_pts <= 20
 ORDER BY min_pts;
 
 
-/* Displaying data that does not yet exist using CASE 
-SELECT Winner, 
-    CASE
-        WHEN Round(AVG(Winner_Pts)) > 50 THEN "GOAT"
-        WHEN Round(AVG(Winner_Pts)) > 45 THEN "EXCELLENT"
-        WHEN Round(AVG(Winner_Pts)) > 25 THEN "GREAT"
-        WHEN Round(AVG(Winner_Pts)) > 15 THEN "OKAY"
-        ELSE "Word_harder"
-    END as "Status"
+/* Displaying data that uses AND or OR functions */
+SELECT * FROM superbowls WHERE MVP = "Drew Brees" OR Winner LIKE "%San%"; 
 
+/* Using AND */ 
+SELECT *
 FROM superbowls
-GROUP BY Status; */
-        
+Where Winner_Pts > 40 AND Loser_Pts < 15;
+
+/* CASE */
+SELECT COUNT(*) AS time_lost, Loser
+   
+FROM superbowls
+GROUP BY Loser
