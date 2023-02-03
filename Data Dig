@@ -97,7 +97,11 @@ FROM superbowls
 Where Winner_Pts > 40 AND Loser_Pts < 15;
 
 /* CASE */
-SELECT COUNT(*) AS time_lost, Loser
-   
+SELECT COUNT(*) AS time_lost, Loser,
+    CASE
+        WHEN COUNT(*)  <= 2 THEN "Good Status"
+        WHEN COUNT(*) BETWEEN 3 AND 4 THEN "Not to Bad"
+        ELSE "GOT TO DO BETTER"
+    END as "Status"
 FROM superbowls
-GROUP BY Loser
+GROUP BY Loser;
