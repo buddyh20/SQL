@@ -1,0 +1,41 @@
+/* Create table about the people and what they do here */
+CREATE TABLE singers (id INTEGER PRIMARY KEY AUTOINCREMENT, artist TEXT, age INTEGER);
+
+INSERT INTO singers (artist, age) VALUES ("Selena Gomez", 30);
+INSERT INTO singers (artist, age) VALUES ("Drake", 36);
+INSERT INTO singers (artist, age) VALUES ("Rihanna", 34);
+INSERT INTO singers (artist, age) VALUES ("Diddy", 53);
+INSERT INTO singers (artist, age) VALUES ("Mary J Blidge", 52);
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY, name TEXT, city_from TEXT);
+
+INSERT INTO songs VALUES (1, "Good For You ft. A$AP Rockey", "Texas");
+INSERT INTO songs VALUES (2, "Over", "Canada");
+INSERT INTO songs VALUES (3, "Kiss It Better", "Barbados");
+INSERT INTO songs VALUES (4, "Coming Home ft. Skyler Grey", "New York");
+INSERT INTO songs VALUES (5, "Not Gon' Cry", "New York");
+
+CREATE TABLE hobbies (id INTEGER PRIMARY KEY, hobby TEXT);
+INSERT INTO hobbies VALUES (2, "Swimming");
+INSERT INTO hobbies VALUES (5, "Mud Riding");
+
+
+/* Match the singer with their song */
+SELECT singers.artist, singers.age, songs.name as song, songs.city_from as birth
+    FROM singers
+    JOIN songs
+    ON singers.id = songs.id;
+
+/* Join all tables together with multiple joins to display only the artist that has hobbies */
+SELECT sing.artist, sing.age, son.name as song, son.city_from as place_birth, hob.hobby
+    FROM hobbies hob
+    JOIN singers sing
+    ON hob.id = sing.id
+    JOIN songs son
+    ON hob.id = son.id;
+
+/* Using Left Outer Join to display artist, age, and hobby even if they do not have any */
+SELECT singers.artist, singers.age, hobbies.hobby 
+    FROM singers
+    LEFT OUTER JOIN hobbies
+    ON singers.id = hobbies.id;
