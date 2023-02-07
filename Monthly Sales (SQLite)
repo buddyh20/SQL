@@ -95,4 +95,4 @@ FROM BIT_DB.JanSales
 WHERE length(orderid) = 6
 AND orderid <> 'Order ID'
 GROUP BY Product --shows one value per field
-ORDER BY SUM(Quantity*price) desc LIMIT 10;
+ORDER BY SUM(Quantity*price) desc LIMIT 1;
