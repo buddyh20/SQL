@@ -1,0 +1,27 @@
+--Display the street and average saftey rating of every street that has a rating higher than 4.0 with CTE
+WITH safety_average AS (
+SELECT AVG(a.safetyrating) AS average_safety, a.street
+FROM CityBikeLanes a
+GROUP BY a.street
+)
+SELECT street, average_safety, 'Safe Lane' AS label
+FROM safety_average
+WHERE average_safety >= 4.0;
+
+--Take the average safetyrating over the entire result set, partitioned by street
+SELECT street, safetyrating,
+AVG(safetyrating) OVER (PARTITION BY street) as "Average_safety_rating"
+FROM CityBikeLanes;
+
+--Find the bike lanes, both safety ratings of each lane, average of each lane, and a label based on recommendation using a Window Function
+SELECT street, safetyrating, 
+AVG(safetyrating) OVER (PARTITION BY street) as "Average_Rating",
+CASE
+    WHEN AVG(safetyrating) OVER (PARTITION BY street) >= 4 THEN "Leave As-Is"
+    WHEN AVG(safetyrating) OVER (PARTITION BY street) < 2.5 THEN "Remove"
+    ELSE "Improvements Needed"
+END as "Status"
+FROM CityBikeLanes;
+
+
+
