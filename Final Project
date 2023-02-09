@@ -81,10 +81,6 @@ JOIN genres
 ON genres.GenreId = tracks.GenreId;
 
 -- 13.) Show the total sales made by each sales agent
-SELECT * FROM employees;
-SELECT * FROM invoices;
-SELECT * FROM customers;
-
 SELECT emp.LastName, emp.FirstName,
 ROUND(SUM(Total), 2) as 'Total Sales'
 FROM employees emp
@@ -106,5 +102,14 @@ ON invoices.CustomerId = customers.CustomerId
 WHERE emp.Title = 'Sales Support Agent' AND invoices.InvoiceDate BETWEEN '2009-01-01' AND '2009-12-31'
 GROUP BY emp.FirstName
 ORDER BY ROUND(SUM(Total), 2) desc LIMIT 1;
+
+-- 15.) What customers dealt with employees that was not Sales Agents?
+SELECT emp.LastName AS 'Emp Last', emp.FirstName AS 'Emp First', cust.LastName AS 'Customer Last', cust.FirstName AS 'Customer First'
+FROM customers cust
+RIGHT OUTER JOIN employees emp
+ON emp.employeeId = cust.SupportRepId
+WHERE emp.Title != 'Sales Support Agent'
+GROUP BY emp.LastName;
+
 
 
